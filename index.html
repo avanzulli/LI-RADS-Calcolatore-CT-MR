@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calcolatore LI-RADS® CT/MR v2018</title>
 <meta name="description" content="Calcolatore LI-RADS CT/MR v2018 per pazienti a rischio di HCC.">
-<!-- PWA / iOS -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0c4a6e">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,20 +19,18 @@
   header{background:#0c4a6e;color:#fff;padding:16px 20px}
   main{max-width:980px;margin:0 auto;padding:20px}
   h1{font-size:22px;margin:0}
-  h2{font-size:18px;margin-top:24px}
   fieldset{border:1px solid #e5e7eb;border-radius:10px;margin:18px 0;padding:12px;background:#fff;min-width:0}
   legend{padding:0 8px;color:#0c4a6e;font-weight:600}
   label{display:block;margin:6px 0}
   .row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
   .col{flex:1 1 280px;min-width:240px}
-  select, input[type="number"], input[type="text"] {width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;background:#fff}
+  select, input[type="number"] {width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;background:#fff}
   select:focus, input:focus{outline:2px solid #0ea5e9;outline-offset:1px}
   .hint{font-size:12px;color:#475569}
   .pill{display:inline-flex;align-items:center;background:#eef;padding:4px 10px;border-radius:999px;margin:0 8px 8px 0;font-size:12px;white-space:normal}
   .pillwrap{display:flex;flex-wrap:wrap;margin-top:8px}
   .out{border-left:4px solid #0c4a6e;background:#fff;padding:12px 12px;margin-top:12px;border-radius:8px;min-width:0;word-wrap:break-word}
   .cat{font-weight:800;font-size:20px}
-  .badge{display:inline-block;padding:2px 8px;border-radius:999px;background:#eee;margin-left:8px}
   .lr-1{background:#e5f6ff}
   .lr-2{background:#e8fff2}
   .lr-3{background:#fff8e1}
@@ -44,22 +41,16 @@
   .small{font-size:12px;color:#334155}
   .footer{font-size:12px;color:#334155;margin-top:16px}
   .btn{background:#0c4a6e;color:#fff;border:none;padding:12px 16px;border-radius:10px;cursor:pointer}
-  .btn:disabled{opacity:.6;cursor:not-allowed}
   .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;align-items:start}
   .checks label{display:flex;align-items:flex-start;gap:10px;line-height:1.3}
   .checks input[type="checkbox"]{margin-top:2px;flex:0 0 auto}
-  .checks{min-width:0}
-  @media (max-width: 480px){
-    h1{font-size:20px}
-    .col{min-width:100%}
-    .btn{width:100%}
-  }
+  @media (max-width: 480px){ .col{min-width:100%} .btn{width:100%} }
 </style>
 </head>
 <body>
 <header>
   <h1>Calcolatore LI-RADS® CT/MR v2018</h1>
-  <div class="hint">Per pazienti a rischio di HCC (cirrosi, HBV cronica, HCC pregresso). Basato su ACR LI-RADS CT/MRI v2018.</div>
+  <div class="hint">Applicabile solo a pazienti a rischio di HCC (cirrosi, HBV cronica, HCC pregresso).</div>
 </header>
 <main>
   <fieldset>
@@ -67,23 +58,22 @@
     <div class="grid2 checks">
       <label><input id="atRisk" type="checkbox" checked> <span>Paziente a rischio (cirrosi o HBV cronico o HCC pregresso)</span></label>
       <label><input id="pathProven" type="checkbox"> <span>Lesione già provata istologicamente (se sì, non assegnare LI-RADS)</span></label>
-      <label><input id="nonCateg" type="checkbox"> <span>Esame non categorizzabile (omissioni/degradazione: → LR-NC)</span></label>
+      <label><input id="nonCateg" type="checkbox"> <span>Esame non categorizzabile (omissioni/degradazione)</span></label>
     </div>
   </fieldset>
 
   <fieldset>
     <legend>Scorciatoie (override)</legend>
     <div class="grid2 checks">
-      <label><input id="tiv" type="checkbox"> <span>Presenza certa di trombo neoplastico / tessuto molle potenziato in vena → LR‑TIV</span></label>
-      <label><input id="lrm" type="checkbox"> <span>Aspetto <em>targetoid</em> / infiltrativo o altre caratteristiche non‑HCC → LR‑M</span></label>
-      <label><input id="lr1" type="checkbox"> <span>Diagnosi certa di benignità (cisti, angioma, ecc.) → LR‑1</span></label>
-      <label><input id="lr2" type="checkbox"> <span>Verosimile benignità → LR‑2</span></label>
+      <label><input id="tiv" type="checkbox"> <span>Tumore in vena → LR‑TIV</span></label>
+      <label><input id="lrm" type="checkbox"> <span>Aspetto non‑HCC (targetoid/infiltrativo) → LR‑M</span></label>
+      <label><input id="lr1" type="checkbox"> <span>Benigno certo → LR‑1</span></label>
+      <label><input id="lr2" type="checkbox"> <span>Probabilmente benigno → LR‑2</span></label>
     </div>
-    <div class="hint small">Usare LR‑M e LR‑TIV quando i criteri sono soddisfatti indipendentemente dalle maggiori.</div>
   </fieldset>
 
   <fieldset>
-    <legend>Dati dell'osservazione (Tabella diagnostica)</legend>
+    <legend>Dati dell'osservazione</legend>
     <div class="row">
       <div class="col">
         <label>Modalità/mezzo di contrasto
@@ -112,14 +102,13 @@
     <div class="row checks">
       <div class="col">
         <label><input id="washout" type="checkbox"> <span>Washout non-periferico</span></label>
-        <div class="hint small">Applicabile in PV tardiva/equilibrio (CT/MRI ECA) o portale tardiva su MRI HBA; non usare la HBP per definire washout.</div>
+        <div class="hint small">Non usare la fase HBP per definire washout.</div>
       </div>
       <div class="col">
         <label><input id="capsule" type="checkbox"> <span>Capsula potenziante</span></label>
       </div>
       <div class="col">
         <label><input id="tgrowth" type="checkbox"> <span>Threshold growth (≥50% in ≤6 mesi)</span></label>
-        <div class="hint small">La crescita sub‑threshold non soddisfa il criterio maggiore.</div>
       </div>
     </div>
   </fieldset>
@@ -128,13 +117,13 @@
     <legend>Caratteristiche ancillari (opzionali)</legend>
     <div class="row checks">
       <div class="col">
-        <label><input id="afMal" type="checkbox"> <span>≥1 ancillare che favorisce malignità (es. restrizione diffusiva, T2 lieve‑moderata, ipointensità HBP, corona enhancement...)</span></label>
+        <label><input id="afMal" type="checkbox"> <span>≥1 pro‑malignità</span></label>
       </div>
       <div class="col">
-        <label><input id="afBen" type="checkbox"> <span>≥1 ancillare che favorisce benignità (es. parallela al sangue, stabilità >2 anni, vasi indisturbati...)</span></label>
+        <label><input id="afBen" type="checkbox"> <span>≥1 pro‑benignità</span></label>
       </div>
     </div>
-    <div class="hint small">Le ancillari non possono portare a LR‑5 e non si applicano se coesistono sia pro‑malignità sia pro‑benignità.</div>
+    <div class="hint small">Ancillari: ±1 categoria, ma mai fino a LR‑5; se contrastanti, nessun aggiustamento.</div>
   </fieldset>
 
   <button id="calc" class="btn">Calcola LI‑RADS</button>
@@ -142,7 +131,7 @@
   <div id="output" class="out" style="display:none"></div>
 
   <div class="footer">
-    <p>Fonti principali: ACR <strong>LI‑RADS® CT/MRI v2018 Core</strong>. Usare solo in pazienti a rischio di HCC. Questo strumento non sostituisce il giudizio clinico‑radiologico.</p>
+    <p>Basato su ACR LI‑RADS CT/MRI v2018. Strumento di supporto: non sostituisce il giudizio clinico‑radiologico.</p>
   </div>
 </main>
 
@@ -161,31 +150,32 @@ function computeBaseCategory(aphe,size,washout,capsule,tgrowth){
       return {cat:'LR-4', why:['≥20 mm senza APHE con ≥1 maggiore → LR‑4']};
     }
   }
+  // APHE presente (non-rim)
   if(size<10){
-    if(addMaj===0) return {cat:'LR-3', why:['<10 mm con APHE non‑rim e 0 maggiori addizionali → LR‑3']};
-    if(addMaj===1) return {cat:'LR-4', why:['<10 mm con APHE non‑rim e 1 maggiore addizionale → LR‑4']};
-    return {cat:'LR-4', why:['<10 mm con APHE non‑rim e ≥2 maggiori addizionali → LR‑4']};
+    if(addMaj===0) return {cat:'LR-3', why:['<10 mm con APHE non‑rim e 0 maggiori → LR‑3']};
+    return {cat:'LR-4', why:['<10 mm con APHE non‑rim e ≥1 maggiore → LR‑4 (mai LR‑5 per <10 mm)']};
   }
   if(size>=10 && size<=19){
-    if(addMaj===0) return {cat:'LR-4', why:['10–19 mm con APHE non‑rim e 0 maggiori addizionali → LR‑4']};
+    if(addMaj===0) return {cat:'LR-3', why:['10–19 mm con APHE non‑rim e 0 maggiori → LR‑3 (esempio ACR)']};
     if(addMaj===1){
       if(washout || tgrowth){
-        return {cat:'LR-5', why:['10–19 mm con APHE non‑rim + (washout non‑periferico OPPURE threshold growth) → LR‑5']};
+        return {cat:'LR-5', why:['10–19 mm con APHE non‑rim + (washout OPPURE threshold growth) → LR‑5']};
       } else {
-        return {cat:'LR-4', why:['10–19 mm con APHE non‑rim + solo capsula → LR‑4']};
+        return {cat:'LR-4', why:['10–19 mm con APHE non‑rim + sola capsula → LR‑4']};
       }
     }
-    return {cat:'LR-5', why:['10–19 mm con APHE non‑rim e ≥2 maggiori (qualunque combinazione) → LR‑5']};
+    return {cat:'LR-5', why:['10–19 mm con APHE non‑rim e ≥2 maggiori → LR‑5']};
   }
-  if(addMaj===0) return {cat:'LR-4', why:['≥20 mm con APHE non‑rim e 0 maggiori addizionali → LR‑4']};
-  return {cat:'LR-5', why:['≥20 mm con APHE non‑rim e ≥1 maggiore addizionale → LR‑5']};
+  // ≥20 mm
+  if(addMaj===0) return {cat:'LR-4', why:['≥20 mm con APHE non‑rim e 0 maggiori → LR‑4']};
+  return {cat:'LR-5', why:['≥20 mm con APHE non‑rim e ≥1 maggiore → LR‑5']};
 }
 
 function adjustWithAF(cat,afMal,afBen){
   const order = ['LR-1','LR-2','LR-3','LR-4','LR-5'];
   let idx = order.indexOf(cat);
   let note = null;
-  if(afMal && afBen){ note = 'Presenti ancillari contrastanti: nessun aggiustamento.'; return {cat, note}; }
+  if(afMal && afBen){ note = 'Ancillari contrastanti: nessun aggiustamento.'; return {cat, note}; }
   if(afMal && cat!=='LR-5'){
     if(idx>=0 && idx<4){ idx = Math.min(idx+1, 3); }
     note = 'Upgrade di 1 categoria per ancillari pro‑malignità (mai fino a LR‑5).';
@@ -212,9 +202,15 @@ function runCalc(){
   const lr1 = document.getElementById('lr1').checked;
   const lr2 = document.getElementById('lr2').checked;
 
+  if(!atRisk){
+    out.className='out';
+    out.innerHTML = '<div class="cat">Fuori campo LI‑RADS</div><div class="small">Il sistema si applica solo a pazienti a rischio HCC. Fornire descrizione senza categoria.</div>';
+    return;
+  }
+
   if(pathProven){
     out.className='out';
-    out.innerHTML = '<div class="cat">Lesione provata istologicamente: non assegnare LI‑RADS.</div>';
+    out.innerHTML = '<div class="cat">Lesione provata istologicamente</div><div class="small">Non assegnare una categoria LI‑RADS.</div>';
     return;
   }
   if(nonCateg){
@@ -222,8 +218,8 @@ function runCalc(){
     out.innerHTML = '<div class="cat">LR‑NC</div><div class="small">Esame non categorizzabile per omissioni o artefatti.</div>';
     return;
   }
-  if(tiv){ out.className='out lr-tiv'; out.innerHTML = '<div class="cat">LR‑TIV</div><div class="small">Tumore in vena: tessuto molle intravascolare con potenziamento.</div>'; return; }
-  if(lrm){ out.className='out lr-m'; out.innerHTML = '<div class="cat">LR‑M</div><div class="small">Aspetto non specifico per HCC (p.es. targetoid, infiltrativo).</div>'; return; }
+  if(tiv){ out.className='out lr-tiv'; out.innerHTML = '<div class="cat">LR‑TIV</div><div class="small">Tessuto molle intravascolare con potenziamento.</div>'; return; }
+  if(lrm){ out.className='out lr-m'; out.innerHTML = '<div class="cat">LR‑M</div><div class="small">Aspetto non specifico per HCC (targetoid/infiltrativo, ecc.).</div>'; return; }
   if(lr1){ out.className='out lr-1'; out.innerHTML = '<div class="cat">LR‑1</div><div class="small">Aspetto sicuramente benigno.</div>'; return; }
   if(lr2){ out.className='out lr-2'; out.innerHTML = '<div class="cat">LR‑2</div><div class="small">Aspetto probabilmente benigno.</div>'; return; }
 
@@ -234,12 +230,6 @@ function runCalc(){
   const tgrowth = document.getElementById('tgrowth').checked;
   const afMal = document.getElementById('afMal').checked;
   const afBen = document.getElementById('afBen').checked;
-
-  if(!atRisk){
-    out.className='out';
-    out.innerHTML = '<div class="cat">Attenzione</div><div class="small">LI‑RADS si applica solo a pazienti a rischio HCC. Senza fattori di rischio, non assegnare una categoria: usa report descrittivo.</div>';
-    return;
-  }
 
   const base = computeBaseCategory(aphe,size,washout,capsule,tgrowth);
   let cat = base.cat;
@@ -281,13 +271,12 @@ function runCalc(){
   const optn=document.createElement('div');
   optn.className='small';
   optn.style.marginTop='8px';
-  optn.innerHTML='Nota OPTN: 10–19 mm + APHE + washout è LR‑5 ma non soddisfa OPTN‑5.';
+  optn.innerHTML='Nota OPTN: 10–19 mm + APHE + washout → LR‑5 (ma non necessariamente OPTN‑5).';
   out.appendChild(optn);
 }
 
 document.getElementById('calc').addEventListener('click', runCalc);
 
-// (Facoltativo) registra un service worker se presente
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
